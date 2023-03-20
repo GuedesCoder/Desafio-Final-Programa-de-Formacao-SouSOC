@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Exames Realizados</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Listar Exames Realizados</h1>
+		<form action="#" method="get">
+			<div class="form-group">
+				<label for="funcionario">Funcionário:</label>
+				<select class="form-control" id="funcionario" name="funcionario">
+					<option value="">Todos</option>
+					<th:block th:each="funcionario : ${funcionarios}">
+						<option th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
+					</th:block>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="exame">Exame:</label>
+				<select class="form-control" id="exame" name="exame">
+					<option value="">Todos</option>
+					<th:block th:each="exame : ${exames}">
+						<option th:value="${exame.id}" th:text="${exame.nome}"></option>
+					</th:block>
+				</select>
+			</div>
+		</form>
+		<br />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Funcionário</th>
+					<th>Exame</th>
+					<th>Data do Exame</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="exameRealizado : ${examesRealizados}">
+					<tr>
+						<td th:text="${exameRealizado.funcionario.nome}"></td>
+						<td th:text="${exameRealizado.exame.nome}"></td>
+						<td th:text="${#dates.format(exameRealizado.dataExame, 'dd/MM/yyyy')}"></td>
+						<td>
+							<a th:href="@{/examesRealizados/{id}(id=${exameRealizado.id})}"
+								class="btn btn-info btn-sm">Detalhes</a>
+							<a th:href="@{/examesRealizados/{id}/editar(id=${exameRealizado.id})}"
+								class="btn btn-primary btn-sm">Editar</a>
+							<form th:action="@{/examesRealizados/deletar/{id}(id=${exameRealizado.id})}" method="post"
+								style="display: inline-block;">
+								<button type="submit" class="btn btn-danger btn-sm"
+									onclick="return confirm('Deseja realmente excluir o exame realizado?')">Excluir
+								</button>
+							</form>
+						</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

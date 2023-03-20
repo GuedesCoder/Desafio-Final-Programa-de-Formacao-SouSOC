@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Ver Exame Realizado</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		.container {
+			margin-top: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="mb-4">Detalhes do Exame Realizado</h1>
+		<div class="row">
+			<div class="col-md-4">
+				<h4>Funcionário:</h4>
+				<p>ID: <span id="funcionarioId"></span></p>
+				<p>Nome: <span id="funcionarioNome"></span></p>
+			</div>
+			<div class="col-md-4">
+				<h4>Exame:</h4>
+				<p>ID: <span id="exameId"></span></p>
+				<p>Nome: <span id="exameNome"></span></p>
+			</div>
+			<div class="col-md-4">
+				<h4>Data de realização:</h4>
+				<p><span id="dataRealizacao"></span></p>
+			</div>
+		</div>
+		<div class="mt-4">
+			<button class="btn btn-danger" id="excluirExameRealizado">Excluir exame</button>
+			<a href="/examesRealizados" class="btn btn-secondary">Voltar para a lista</a>
+		</div>
+	</div>
+
+	<script>
+		const exameRealizado = JSON.parse('{{ exameRealizado | tojson | safe }}');
+		document.getElementById("funcionarioId").innerText = exameRealizado.funcionario.id;
+		document.getElementById("funcionarioNome").innerText = exameRealizado.funcionario.nome;
+		document.getElementById("exameId").innerText = exameRealizado.exame.id;
+		document.getElementById("exameNome").innerText = exameRealizado.exame.nome;
+		document.getElementById("dataRealizacao").innerText = exameRealizado.dataRealizacao;
+
+		document.getElementById("excluirExameRealizado").addEventListener("click", function () {
+			fetch("/examesRealizados/" + exameRealizado.id, {method: "DELETE"})
+				.then(() => window.location.href = "/examesRealizados");
+		});
+	</script>
+</body>
+
+</html>

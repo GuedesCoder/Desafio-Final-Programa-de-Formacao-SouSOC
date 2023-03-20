@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<title>Ver Exame</title>
+</head>
+
+<body style="background-color: #afddfa">
+	<div class="container mt-5">
+		<div class="card-header" style="background-color: #50b4f2">
+			<h1>Ver Exame</h1>
+			<p>Aqui estão as informações do exame selecionado</p>
+		</div>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${exame.id}"></td>
+					<td th:text="${exame.nome}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a class="btn btn-secondary mt-3" th:href="@{/listar-exames}">Voltar</a>
+	</div>
+</body>
+
+</html>
